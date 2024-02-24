@@ -1,56 +1,52 @@
 package com.example.myapplication1;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import android.widget.Toast;
-
+import android.view.View;
 import android.util.Log;
 
-public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MyApp";
 
+public class MainActivity extends AppCompatActivity {
+    protected static final String TAG = "MyApplication1";
+    public static final String KEY = "key";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toast.makeText(this,"Приложение создано",Toast.LENGTH_SHORT).show();
-        Log.i(TAG,"Приложение создано");
+        findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                intent.putExtra(KEY, "key is here");
+                mStartForResult.launch(intent);
+            }
+        });
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Toast.makeText(this,"Приложение запущено",Toast.LENGTH_SHORT).show();
-        Log.e(TAG,"Приложение запущено");
-    }
+    ActivityResultLauncher<Intent> mStartForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == AppCompatActivity.RESULT_OK) {
+                        Intent data = result.getData();
+                        String returnedData = data.getStringExtra("key");
+                        Log.i(TAG, "Returned data from SecondActivity: " + returnedData);
+                    }
+                    else {
+                        Log.i(TAG, "No data from SecondActivity");
+                    }
+                }
+            });
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Toast.makeText(this,"Приложение возобновлено",Toast.LENGTH_SHORT).show();
-        Log.w(TAG,"Приложение возобновлено");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Toast.makeText(this,"Приложение приостановлено",Toast.LENGTH_SHORT).show();
-        Log.i(TAG,"Приложение приостановлено");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Toast.makeText(this,"Приложение остановлено",Toast.LENGTH_SHORT).show();
-        Log.i(TAG,"Приложение остановлено");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Toast.makeText(this,"Приложение закрыто",Toast.LENGTH_SHORT).show();
-        Log.i(TAG,"Приложение закрыто");
-    }
+    /*public void logClick(View view) {
+        Intent intent = new Intent(this, SecondActivity.class);
+        startActivity(intent);
+        //Log.i(TAG, "Кнопка была нажата");
+    }*/
 }

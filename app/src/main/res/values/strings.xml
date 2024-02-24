@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">My Application1</string>
+    <string name="my_name">Maksim Matyukhin</string>
+    <string name="my_age">20 years</string>
+    <string name="hello_world">Hello, world!</string>
+    <string name="button">button</string>
 </resources>
