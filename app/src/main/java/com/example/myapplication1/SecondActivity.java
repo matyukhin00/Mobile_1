@@ -11,22 +11,19 @@ import java.util.Objects;
 
 public class SecondActivity extends AppCompatActivity {
     public static final String KEY = "key";
-    @Override
+
+    public SecondActivity() {
+        super(R.layout.second_file);
+    }
+    /*@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.relative_layout);
-        getArgs();
-    }
-    private void getArgs() {
-        Bundle arg = getIntent().getExtras();
-        assert arg != null;
-        String name = Objects.requireNonNull(arg.get("key").toString());
-        Log.i(MainActivity.TAG, name);
-    }
-    public void onClick1(View view) {
-        Intent intent = new Intent();
-        intent.putExtra(KEY, "key is here 2");
-        setResult(RESULT_OK, intent);
-        finish();
-    }
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .setReorderingAllowed(true)
+                    .add(R.id.fragment_container_view1, SecondFragment.class, null)
+                    .commit();
+        }
+    }*/
 }
