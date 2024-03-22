@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,8 +25,15 @@ public class FirstFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Toast.makeText(getContext(), "onCreate", Toast.LENGTH_SHORT).show();
-        Log.d(TAG, "onCreate");
+        /*Toast.makeText(getContext(), "onCreate", Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "onCreate");*/
+        if (savedInstanceState == null) {
+            getChildFragmentManager()
+                    .beginTransaction()
+                    .setReorderingAllowed(true)
+                    .add(R.id.fragment_container_view1, SecondFragment.class, null)
+                    .commit();
+        }
     }
 
     @Nullable
@@ -46,6 +55,15 @@ public class FirstFragment extends Fragment {
                 getParentFragmentManager().setFragmentResult("Key", result);
             }
         });
+
+        getChildFragmentManager().setFragmentResultListener("cfm_key", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
+                String result = bundle.getString("bundleKey000");
+                editText.setText(result);
+            }
+        });
+
         return view;
     }
 

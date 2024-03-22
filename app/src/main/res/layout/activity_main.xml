@@ -13,13 +13,13 @@
         android:layout_height="match_parent"
         android:id="@+id/fragment_container_view"/>
 
-    <androidx.fragment.app.FragmentContainerView
+    <!--<androidx.fragment.app.FragmentContainerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/fragment_container_view1"/>
-    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container_view1"/> -->
+    <!--<androidx.fragment.app.FragmentContainerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/fragment_container_view2"/>
+        android:id="@+id/fragment_container_view2"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

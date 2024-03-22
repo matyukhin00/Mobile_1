@@ -25,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
                     .beginTransaction()
                     .setReorderingAllowed(true)
                     .add(R.id.fragment_container_view, FirstFragment.class, null)
-                    .add(R.id.fragment_container_view1, SecondFragment.class, null)
-                    .add(R.id.fragment_container_view2, ThirdFragment.class, null)
                     .commit();
         }
     }

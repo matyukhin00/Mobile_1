@@ -44,9 +44,10 @@ public class SecondFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Bundle result = new Bundle();
-                String name = textView.getText().toString();
-                result.putString("bundleKey1", name);
-                getParentFragmentManager().setFragmentResult("Key1", result);
+                //String name = textView.getText().toString();
+                result.putString("bundleKey000", "Результат от дочернего фрагмента");
+                getParentFragmentManager().setFragmentResult("cfm_key", result);
+
             }
         });
 
